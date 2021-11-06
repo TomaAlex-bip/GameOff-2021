@@ -7,14 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement Instance { get; private set; }
 
-    public float Speed
+    public float Speed  // gets the absolute value of updatedSpeed;
     {
         get
         {
-            if (!isGrounded)
-            {
-                return 0;
-            }
             if (verticalMovement < 0)
             {
                 return -verticalMovement * updatedMovementSpeed;
@@ -34,6 +30,17 @@ public class PlayerMovement : MonoBehaviour
             return 0;
         }
     }
+    public bool Sprinting // gets the boolean value for when the player is moving faster, not when it's pressing the sprint button
+    {
+        get
+        {
+            return updatedMovementSpeed > movementSpeed;
+        }
+    }
+    public bool Jumping // gets the negated value of isGrounded
+    {
+        get => !isGrounded;
+    }
 
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
@@ -43,12 +50,12 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private float sprintMultiplier = 2f;
     [SerializeField] private float crouchMultiplier = 0.5f;
-    [SerializeField] private float gravityMultiplier = 1f;
+    [SerializeField] private float gravityMultiplier = 2f;
 
     private const float GRAVITY = -9.81f;
     private float gravity;
 
-    private float updatedMovementSpeed;
+    private float updatedMovementSpeed; // the actual speed of the player
     private float originalStepOffset;
     private float originalHeight;
     
@@ -102,13 +109,13 @@ public class PlayerMovement : MonoBehaviour
     {
         GetInput();
         
-        UpdateGravity();
+        UpdateGravity();  // just set the actual gravity of the player to the GRAVITY const * multiplier
         
-        CheckGrounding();
+        CheckGrounding();  // check if the character is on ground
         
         CheckHittingRoof();
         
-        //isGrounded = true;   // for infinite jumps BUG
+        //isGrounded = true;   // for infinite jumps bug
         UpdateJumping();
         
         UpdateMovementSpeed();
@@ -133,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void UpdateMovementSpeed()  // update the speed based on different factors, such as sprinting, crouching, being in midair
+    private void UpdateMovementSpeed()  // update the speed based on different factors, such as sprinting, crouching, being in midair, etc...
     {
         if (crouch)
         {
@@ -146,7 +153,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (sprint && isGrounded || sprint && jump)
         {
-            updatedMovementSpeed = movementSpeed * sprintMultiplier;
+            if (verticalMovement > 0f)
+            {
+                updatedMovementSpeed = movementSpeed * sprintMultiplier;
+            }
+            else
+            {
+                updatedMovementSpeed = movementSpeed;
+            }
         }
         else if (!sprint) 
         {
@@ -171,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void UpdateJumping()  // Check if Jumping and simulate gravity for the character
+    private void UpdateJumping()  // Check if the player wants to jump and simulate gravity for the character
     {
         if (jump && isGrounded)
         {
@@ -185,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void CheckGrounding()  // check if the character is on ground
+    private void CheckGrounding()  // check if the character is on ground, and if it is, set it's y velocity to a small negative number, so it doesn't levitate
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundCheckLayer);
 
@@ -199,12 +213,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void CheckHittingRoof()
+    private void CheckHittingRoof()  // check if the player is hitting the roof, and if he jumps, stop the velocity from going up
     {
-        
         isHittingRoof = Physics.CheckCapsule(headCheck.position, headCheck.position + new Vector3(0f, 0.5f, 0f), 0.3f, groundCheckLayer);
-        
 
+        // this part here makes sure that is the player decide to jump and hits the roof, he goes down
+        // otherwise, it will just stay up in the roof for the time he would be in jumping state
         if (isHittingRoof && velocity.y > 0)
         {
             velocity.y = -1f;
@@ -212,9 +226,6 @@ public class PlayerMovement : MonoBehaviour
     }
     
     
-    
-    
-
     private void UpdateGravity() => gravity = GRAVITY * gravityMultiplier;
 
 
