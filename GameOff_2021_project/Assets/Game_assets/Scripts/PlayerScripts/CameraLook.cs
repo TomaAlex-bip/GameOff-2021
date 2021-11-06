@@ -18,7 +18,7 @@ public class CameraLook : MonoBehaviour
 
     private void Start()
     {
-        cam = transform.Find("Camera");
+        cam = transform.Find("CameraHolder");
 
         Cursor.lockState = CursorLockMode.Locked;
     }

@@ -5,6 +5,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
+    public float Speed
+    {
+        get
+        {
+            if (!isGrounded)
+            {
+                return 0;
+            }
+            if (verticalMovement < 0)
+            {
+                return -verticalMovement * updatedMovementSpeed;
+            }
+            if (verticalMovement > 0)
+            {
+                return verticalMovement * updatedMovementSpeed;
+            }
+            if (horizontalMovement < 0)
+            {
+                return -horizontalMovement * updatedMovementSpeed;
+            }
+            if (horizontalMovement > 0)
+            {
+                return horizontalMovement * updatedMovementSpeed;
+            }
+            return 0;
+        }
+    }
+
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
 
@@ -38,6 +68,20 @@ public class PlayerMovement : MonoBehaviour
     
 
     private Vector3 velocity;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
 
     private void Start()
     {
