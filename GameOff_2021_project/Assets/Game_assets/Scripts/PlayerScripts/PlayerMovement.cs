@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
 
-    [SerializeField] private LayerMask groundCheckLayer;
+    [SerializeField] private List<LayerMask> groundCheckLayers;
     
     
     [SerializeField] private float sprintMultiplier = 2f;
@@ -76,6 +76,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity;
 
+
+    private LayerMask terrainLayerMask;
+
     private void Awake()
     {
         if (Instance == null)
@@ -87,6 +90,8 @@ public class PlayerMovement : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
+        SetTerrainLayerMask();
     }
 
 
@@ -145,7 +150,10 @@ public class PlayerMovement : MonoBehaviour
         if (crouch)
         {
             updatedMovementSpeed = movementSpeed * crouchMultiplier;
+            
+            // !!!!! BUG: micsoareaza sau mareste si cutia pe care o tine playerul !!!!!!!
             transform.localScale = new Vector3(transform.localScale.x, originalHeight / 2f, transform.localScale.z);
+            // sa ma gandesc daca il las sau nu, pare un feature interesant
         }
         else if (isHittingRoof && transform.localScale.y == originalHeight / 2f)
         {
@@ -201,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGrounding()  // check if the character is on ground, and if it is, set it's y velocity to a small negative number, so it doesn't levitate
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundCheckLayer);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, terrainLayerMask);
 
         if (isGrounded && velocity.y < 0)
         {
@@ -215,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckHittingRoof()  // check if the player is hitting the roof, and if he jumps, stop the velocity from going up
     {
-        isHittingRoof = Physics.CheckCapsule(headCheck.position, headCheck.position + new Vector3(0f, 0.5f, 0f), 0.3f, groundCheckLayer);
+        isHittingRoof = Physics.CheckCapsule(headCheck.position, headCheck.position + new Vector3(0f, 0.5f, 0f), 0.3f, terrainLayerMask);
 
         // this part here makes sure that is the player decide to jump and hits the roof, he goes down
         // otherwise, it will just stay up in the roof for the time he would be in jumping state
@@ -229,7 +237,14 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateGravity() => gravity = GRAVITY * gravityMultiplier;
 
 
-
+    private void SetTerrainLayerMask()
+    {
+        terrainLayerMask = 0;
+        foreach (var layer in groundCheckLayers)
+        {
+            terrainLayerMask |= layer.value;
+        }
+    }
 
 
 
