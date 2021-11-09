@@ -2,15 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class CameraEffects : MonoBehaviour
 {
+    public static CameraEffects Instance { get; private set; }
+
+
     [SerializeField] private float bobbingEffectSpeed = 1f;
     [SerializeField] private float bobbingEffectAmplitude = 0.05f;
 
     [SerializeField] private float fieldOfViewMultiplier = 1.2f;
 
+    [SerializeField] private float cameraShakeAmplitude = 0.05f;
+    [SerializeField] private float cameraShakeTime = 1f;
 
     private Vector3 initialPosition;
     
@@ -23,6 +28,23 @@ public class CameraEffects : MonoBehaviour
     private Camera mainCamera;
     
     private PlayerMovement playerMovement;
+
+    private bool cameraShaking;
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private void Start()
     {
         playerMovement = PlayerMovement.Instance;
@@ -30,6 +52,8 @@ public class CameraEffects : MonoBehaviour
 
         mainCamera = GetComponent<Camera>();
         initialFOV = mainCamera.fieldOfView;
+
+        cameraShaking = false;
     }
 
 
@@ -38,7 +62,11 @@ public class CameraEffects : MonoBehaviour
         BobbingEffect();
         
         UpdateFieldOfView();
+     
     }
+
+    
+    public void CameraShake(float amplitude, float time) => StartCoroutine(ShakeCameraCoroutine(amplitude, time));
 
 
     private void BobbingEffect()
@@ -89,6 +117,46 @@ public class CameraEffects : MonoBehaviour
                 initialFOV, 
                 lerpSpeed * Time.deltaTime);
         }
+    }
+
+
+    private IEnumerator ShakeCameraCoroutine(float amplitude, float time)
+    {
+        float t = 0f;
+        while (t < time)
+        {
+            t += Time.deltaTime;
+            var currentPoisiton = transform.localPosition;
+            var x = Random.Range(currentPoisiton.x - amplitude, currentPoisiton.x + amplitude);
+            var y = Random.Range(currentPoisiton.y - amplitude, currentPoisiton.y + amplitude);
+            var desiredPosition = new Vector3(x, y, initialPosition.z);
+            transform.localPosition = desiredPosition;
+            yield return null;
+        }
+        transform.localPosition = initialPosition;
+    }
+    
+    
+    // needs more work
+    private void ShakeCamera(float amplitude, bool shaking)
+    {
+        if (shaking)
+        {
+            var currentPosition = transform.localPosition;
+            var x = Random.Range(currentPosition.x - amplitude, currentPosition.x + amplitude);
+            var y = Random.Range(currentPosition.y - amplitude, currentPosition.y + amplitude);
+
+            var desiredPosition = new Vector3(x, y, currentPosition.z);
+            transform.localPosition = desiredPosition;
+
+        }
+
+        if (!shaking)
+        {
+            transform.localPosition = initialPosition;
+
+        }
+
     }
     
     
