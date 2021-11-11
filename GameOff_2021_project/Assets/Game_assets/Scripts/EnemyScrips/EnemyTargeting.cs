@@ -24,17 +24,28 @@ public class EnemyTargeting : MonoBehaviour
 
     private Transform gunAssembly;
     private Transform invisibleGun;
+    private Transform shield;
+    private Transform invisibleShield;
     private Transform shootPoint;
 
+    private Transform targetingArea;
+    private Transform shootingArea;
 
     private void Start()
     {
         gunAssembly = transform.Find("Gun");
         shootPoint = gunAssembly.Find("ShootPoint");
         invisibleGun = transform.Find("InvisibleGun");
+        shield = transform.Find("Shield");
+        invisibleShield = transform.Find("InvisibleShield");
 
+        targetingArea = transform.Find("Targeting Area");
+        shootingArea = transform.Find("Shooting Area");
         reloaded = true;
-        
+
+        targetingArea.localScale = Vector3.one * minDistanceToTarget * 2f;
+        shootingArea.localScale = Vector3.one * minDistanceToShoot * 2f;
+
     }
 
 
@@ -53,14 +64,23 @@ public class EnemyTargeting : MonoBehaviour
         if (currentDistance <= minDistanceToTarget)
         {
             invisibleGun.LookAt(player);
-            //gunAssembly.LookAt(player);
+            invisibleShield.LookAt(player);
         }
 
         gunAssembly.transform.rotation = Quaternion.RotateTowards(
-            gunAssembly.transform.rotation,
-            invisibleGun.transform.rotation, 
+            gunAssembly.rotation,
+            invisibleGun.rotation, 
             followSpeed * Time.deltaTime);
 
+        var shieldRot = Quaternion.Euler(
+            shield.rotation.eulerAngles.x, 
+            invisibleShield.rotation.eulerAngles.y,
+            shield.rotation.eulerAngles.z);
+
+        shield.rotation = Quaternion.RotateTowards(
+            shield.rotation, 
+            shieldRot, 
+            followSpeed * Time.deltaTime);
 
     }
 
@@ -71,19 +91,24 @@ public class EnemyTargeting : MonoBehaviour
 
         Ray ray = new Ray(gunAssembly.position, gunAssembly.TransformDirection(Vector3.forward));
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, minDistanceToShoot, layerForTargeting)) //TO DO: add a mask !!!
+        if (currentDistance <= minDistanceToShoot)
         {
-            if (hitInfo.collider.CompareTag("Player"))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, minDistanceToShoot,
+                layerForTargeting)) //TO DO: add a mask !!!
             {
-                //print("puscam playeru");
-
-                if (reloaded)
+                if (hitInfo.collider.CompareTag("Player"))
                 {
-                    StartCoroutine(Reload());
-                    Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
-                    reloaded = false;
+                    if (reloaded)
+                    {
+                        StartCoroutine(Reload());
+                        Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
+
+                        //TO DO: instantiate particles
+
+                        reloaded = false;
+                    }
+
                 }
-                
             }
         }
     }

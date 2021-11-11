@@ -14,8 +14,8 @@ public class CameraEffects : MonoBehaviour
 
     [SerializeField] private float fieldOfViewMultiplier = 1.2f;
 
-    [SerializeField] private float cameraShakeAmplitude = 0.05f;
-    [SerializeField] private float cameraShakeTime = 1f;
+    //[SerializeField] private float cameraShakeAmplitude = 0.05f;
+    //[SerializeField] private float cameraShakeTime = 1f;
 
     private Vector3 initialPosition;
     
@@ -29,7 +29,7 @@ public class CameraEffects : MonoBehaviour
     
     private PlayerMovement playerMovement;
 
-    private bool cameraShaking;
+    //private bool cameraShaking;
 
 
     private void Awake()
@@ -53,7 +53,6 @@ public class CameraEffects : MonoBehaviour
         mainCamera = GetComponent<Camera>();
         initialFOV = mainCamera.fieldOfView;
 
-        cameraShaking = false;
     }
 
 

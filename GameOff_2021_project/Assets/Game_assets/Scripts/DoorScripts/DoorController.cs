@@ -9,14 +9,24 @@ public class DoorController : MonoBehaviour
 
     [SerializeField] private int id;
     
-    private Vector3 initialPosition;
-    private Vector3 desiredPosition;
+    private Vector3 initialPositionL;
+    private Vector3 initialPositionR;
+    private Vector3 desiredPositionL;
+    private Vector3 desiredPositionR;
+
+    private Transform leftDoor;
+    private Transform rightDoor;
 
     
     private void Start()
     {
-        initialPosition = transform.localPosition;
-        desiredPosition = transform.localPosition + new Vector3(0f, transform.localScale.y - 0.5f, 0f);
+        leftDoor = transform.Find("left_door");
+        rightDoor = transform.Find("right_door");
+        
+        initialPositionL = leftDoor.localPosition;
+        initialPositionR = rightDoor.localPosition;
+        desiredPositionL = leftDoor.localPosition + new Vector3(0.9f, 0f, 0f);
+        desiredPositionR = rightDoor.localPosition + new Vector3(-0.9f, 0f, 0f);
         
         GameEvents.Instance.onDoorTriggerEnter += OpenDoor;
         GameEvents.Instance.onDoorTriggerExit += CloseDoor;
@@ -27,7 +37,8 @@ public class DoorController : MonoBehaviour
         if (id == triggerId)
         {
             StopAllCoroutines();
-            StartCoroutine(OpenDoorCoroutine());
+            StartCoroutine(OpenLeftDoorCoroutine());
+            StartCoroutine(OpenRightDoorCoroutine());
         }
     }
 
@@ -36,29 +47,48 @@ public class DoorController : MonoBehaviour
         if (id == triggerId)
         {
             StopAllCoroutines();
-            StartCoroutine(CloseDoorCoroutine());
+            StartCoroutine(CloseLeftDoorCoroutine());
+            StartCoroutine(CloseRightDoorCoroutine());
         }
     }
 
 
-    private IEnumerator OpenDoorCoroutine()
+    private IEnumerator OpenLeftDoorCoroutine()
     {
-        while (Vector3.Distance(transform.localPosition, desiredPosition) > 0.0001f)
+        while (Vector3.Distance(leftDoor.localPosition, desiredPositionL) > -0.0001f)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, desiredPosition, doorSpeed * Time.deltaTime);
-            //print("corutina cu OPEN");
+            leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, desiredPositionL, doorSpeed * Time.deltaTime);
+            yield return null;
+        }
+        
+    }
+    
+    private IEnumerator OpenRightDoorCoroutine()
+    {
+        while (Vector3.Distance(rightDoor.localPosition, desiredPositionR) > -0.0001f)
+        {
+            rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, desiredPositionR, doorSpeed * Time.deltaTime);
             yield return null;
         }
         
     }
     
     
-    private IEnumerator CloseDoorCoroutine()
+    private IEnumerator CloseLeftDoorCoroutine()
     {
-        while (Vector3.Distance(transform.localPosition, initialPosition) > 0.0001f)
+        while (Vector3.Distance(leftDoor.localPosition, initialPositionL) > 0.0001f)
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition, doorSpeed * Time.deltaTime);
-            //print("corutina cu CLOSE");
+            leftDoor.localPosition = Vector3.Lerp(leftDoor.localPosition, initialPositionL, doorSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+    }
+    
+    private IEnumerator CloseRightDoorCoroutine()
+    {
+        while (Vector3.Distance(rightDoor.localPosition, initialPositionR) > 0.0001f)
+        {
+            rightDoor.localPosition = Vector3.Lerp(rightDoor.localPosition, initialPositionR, doorSpeed * Time.deltaTime);
             yield return null;
         }
 
