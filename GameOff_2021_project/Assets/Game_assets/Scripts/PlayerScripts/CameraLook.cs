@@ -7,6 +7,9 @@ public class CameraLook : MonoBehaviour
     [Range(0f, 5f)]
     [SerializeField] private float mouseSensitivity;
 
+    [SerializeField] private float minLookDown = 80f;
+    [SerializeField] private float maxLookUp = 90f;
+    
     private Transform cam;
 
     private float xRot = 0f;
@@ -42,7 +45,7 @@ public class CameraLook : MonoBehaviour
     private void SimpleRotation()
     {
         xRot -= mouseY;
-        xRot = Mathf.Clamp(xRot, -90f, 90f);
+        xRot = Mathf.Clamp(xRot, -maxLookUp, minLookDown);
 
         cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
 

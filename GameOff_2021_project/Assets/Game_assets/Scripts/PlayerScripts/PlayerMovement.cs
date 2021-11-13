@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float sprintMultiplier = 2f;
     [SerializeField] private float crouchMultiplier = 0.5f;
     [SerializeField] private float gravityMultiplier = 2f;
+    [SerializeField] private float heightDivider = 0.6f;
 
     private const float GRAVITY = -9.81f;
     private float gravity;
@@ -79,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
 
     private LayerMask terrainLayerMask;
 
+
+
+    private PlayerAnimationController playerAnim;
+
     private void Awake()
     {
         if (Instance == null)
@@ -99,12 +104,15 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
 
+        playerAnim = PlayerAnimationController.Instance;
+        
         groundCheck = transform.Find("GroundCheck");
         headCheck = transform.Find("HeadCheck");
 
         updatedMovementSpeed = movementSpeed;
         originalStepOffset = characterController.stepOffset;
-        originalHeight = transform.localScale.y;
+        //originalHeight = transform.localScale.y;
+        originalHeight = characterController.height;
         
         // just apply the multiplier to the gravity constant
         UpdateGravity();
@@ -128,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
 
 
+        UpdateAnimations();
     }
 
 
@@ -152,10 +161,16 @@ public class PlayerMovement : MonoBehaviour
             updatedMovementSpeed = movementSpeed * crouchMultiplier;
             
             // !!!!! BUG: micsoareaza sau mareste si cutia pe care o tine playerul !!!!!!!
-            transform.localScale = new Vector3(transform.localScale.x, originalHeight / 2f, transform.localScale.z);
+            //transform.localScale = new Vector3(transform.localScale.x, originalHeight / 2f, transform.localScale.z);
             // sa ma gandesc daca il las sau nu, pare un feature interesant
+
+            characterController.height = originalHeight * heightDivider;
+            
+            // TO DO!!!!
+            // move the ground check because is going under the floor
+
         }
-        else if (isHittingRoof && transform.localScale.y == originalHeight / 2f)
+        else if (isHittingRoof && Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.01f)
         {
            updatedMovementSpeed = movementSpeed * crouchMultiplier;
         }
@@ -177,7 +192,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (!crouch && isHittingRoof == false)
         {
-            transform.localScale = new Vector3(transform.localScale.x, originalHeight, transform.localScale.z);
+            //transform.localScale = new Vector3(transform.localScale.x, originalHeight, transform.localScale.z);
+            characterController.height = originalHeight;
         }
 
         
@@ -231,6 +247,48 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = -1f;
         }
+    }
+
+    // nu e bine
+    private void UpdateAnimations()
+    {
+        if (horizontalMovement != 0 || verticalMovement != 0)
+        {
+            if (!isGrounded)
+            {
+                playerAnim.JumpAnimation();
+            }
+            else if (crouch)
+            {
+                playerAnim.CrouchWalkAnimation();
+            }
+            else if (sprint)
+            {
+                playerAnim.RunAnimation();
+            }
+            else
+            {
+                playerAnim.WalkAnimation();
+            }
+        }
+        else
+        {
+            if (!isGrounded)
+            {
+                playerAnim.JumpAnimation();
+            }
+            else if (crouch)
+            {
+                playerAnim.CrouchIdleAnimation();
+            }
+            else
+            {
+                playerAnim.IdleAnimation();
+            }
+            
+        }
+        
+        
     }
     
     

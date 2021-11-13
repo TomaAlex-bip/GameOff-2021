@@ -96,7 +96,7 @@ public class EnemyTargeting : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hitInfo, minDistanceToShoot,
                 layerForTargeting)) //TO DO: add a mask !!!
             {
-                if (hitInfo.collider.CompareTag("Player"))
+                if (hitInfo.collider.CompareTag("Player") && !PlayerManager.Instance.InRespawnTime)
                 {
                     if (reloaded)
                     {

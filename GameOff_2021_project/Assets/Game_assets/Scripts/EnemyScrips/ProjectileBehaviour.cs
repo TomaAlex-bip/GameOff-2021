@@ -27,25 +27,26 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //print("hatz");
-        if (other.CompareTag("Player"))
-        {
-            //print("te-am lovit fraiere");
 
-            CameraEffects.Instance.CameraShake(0.05f, 0.1f);
+        switch (other.tag)
+        {
+            case "Player":
+                
+                CameraEffects.Instance.CameraShake(0.05f, 0.1f);
+                Destroy(gameObject);
+                PlayerManager.Instance.DamagePlayer();
+                
+                break;
             
-            Destroy(gameObject);
+            case "Projectile":
+                break;
+            
+            default:
+                Destroy(gameObject);
+                break;
         }
-        else if (other.CompareTag("Projectile"))
-        {
-            //print("se dau cap in cap");
-        }
-        else
-        {
-            Destroy(gameObject);
-            //print("am dat de perete");
         
-        }
+        
     }
 
 
