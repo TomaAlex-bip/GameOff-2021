@@ -319,7 +319,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+    public void Respawn()
+    {
+        transform.position = Vector3.zero;
+    }
 
 
 

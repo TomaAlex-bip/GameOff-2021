@@ -21,6 +21,10 @@ public class PlayerManager : MonoBehaviour
 
     private bool inRespawnTime;
 
+    private Transform cameraHolder;
+    private Vector3 desiredPosition = new Vector3(0f, 2f, -1f);
+    private Vector3 initialPoistion;
+    
 
     private void Awake()
     {
@@ -40,25 +44,32 @@ public class PlayerManager : MonoBehaviour
     {
         hitPoints = initialHitPoints;
         checkPoint = transform.position + new Vector3(0f, 2f, 0f);
+
+        cameraHolder = transform.Find("CameraHolder");
+        initialPoistion = cameraHolder.localPosition;
+
     }
 
     private void Update()
     {
         if (hitPoints <= 0 && !inRespawnTime)
         {
+
             inRespawnTime = true;
-            hitPoints = initialHitPoints;
             
             print("Gata jocu");
 
+            
             // animatie
+            
             // particule
             
-            //disable movement
-
+            
+            // disable movement
             var cameraLook = transform.GetComponent<CameraLook>();
             var movement = transform.GetComponent<PlayerMovement>();
-
+            var characterController = transform.GetComponent<CharacterController>();
+            characterController.enabled = false;
             cameraLook.enabled = false;
             movement.enabled = false;
             
@@ -85,25 +96,32 @@ public class PlayerManager : MonoBehaviour
         var time = 0f;
         while (time <= timeToRespawn)
         {
+            cameraHolder.localPosition =
+                Vector3.Lerp(cameraHolder.transform.localPosition, desiredPosition, 2f*Time.deltaTime);
+            var rot = Quaternion.Euler(60f, 0f, 0f);
+            cameraHolder.localRotation = Quaternion.Lerp(cameraHolder.localRotation, rot, 2f*Time.deltaTime);
+            
             time += Time.deltaTime;
+            print(time);
             yield return null;
         }
 
-        if (time >= timeToRespawn)
-        {
-            print("te-ai dus al loc");
-        
-        
-            var cameraLook = transform.GetComponent<CameraLook>();
-            var movement = transform.GetComponent<PlayerMovement>();
+        print("te-ai dus al loc");
+        transform.position = checkPoint;
+        cameraHolder.localPosition = initialPoistion;
+        cameraHolder.localRotation = Quaternion.identity;
 
-            cameraLook.enabled = true;
-            movement.enabled = true;
+        var cameraLook = transform.GetComponent<CameraLook>();
+        var movement = transform.GetComponent<PlayerMovement>();
+        var characterController = transform.GetComponent<CharacterController>();
+        characterController.enabled = true;
+        cameraLook.enabled = true;
+        movement.enabled = true;
 
-            transform.position = checkPoint;
+
+        hitPoints = initialHitPoints;
+        inRespawnTime = false;
         
-            inRespawnTime = false;
-        }
 
         
     }
