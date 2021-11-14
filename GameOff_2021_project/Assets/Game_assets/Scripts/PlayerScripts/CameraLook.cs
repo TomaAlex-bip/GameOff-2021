@@ -9,8 +9,10 @@ public class CameraLook : MonoBehaviour
 
     [SerializeField] private float minLookDown = 80f;
     [SerializeField] private float maxLookUp = 90f;
+
+    [SerializeField] private Vector3 crouchCameraPoistion = new Vector3(0f, 0.11f, 0.46f);
     
-    private Transform cam;
+    private Transform cameraHolder;
 
     private float xRot = 0f;
 
@@ -18,12 +20,15 @@ public class CameraLook : MonoBehaviour
     private float mouseX;
     private float mouseY;
 
+    private Vector3 initialCamPos;
 
     private void Start()
     {
-        cam = transform.Find("CameraHolder");
+        cameraHolder = transform.Find("CameraHolder");
 
         Cursor.lockState = CursorLockMode.Locked;
+
+        initialCamPos = cameraHolder.localPosition;
     }
 
     private void Update()
@@ -47,10 +52,13 @@ public class CameraLook : MonoBehaviour
         xRot -= mouseY;
         xRot = Mathf.Clamp(xRot, -maxLookUp, minLookDown);
 
-        cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+        cameraHolder.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
 
         transform.Rotate(Vector3.up * mouseX);
     }
 
+    public void NormalCameraPosition() => cameraHolder.localPosition = initialCamPos;
+
+    public void CrouchCameraPoistion() => cameraHolder.localPosition = crouchCameraPoistion;
 
 }

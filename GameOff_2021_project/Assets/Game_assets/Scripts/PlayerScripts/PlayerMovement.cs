@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     private LayerMask terrainLayerMask;
 
+    private CameraLook cameraLook;
 
 
     private PlayerAnimationController playerAnim;
@@ -102,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        cameraLook = transform.GetComponent<CameraLook>();
+        
         characterController = GetComponent<CharacterController>();
 
         playerAnim = PlayerAnimationController.Instance;
@@ -156,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateMovementSpeed()  // update the speed based on different factors, such as sprinting, crouching, being in midair, etc...
     {
-        if (crouch)
+        if (crouch) // crouched
         {
             updatedMovementSpeed = movementSpeed * crouchMultiplier;
             
@@ -165,6 +168,12 @@ public class PlayerMovement : MonoBehaviour
             // sa ma gandesc daca il las sau nu, pare un feature interesant
 
             characterController.height = originalHeight * heightDivider;
+            //characterController.center = new Vector3(0f, -(originalHeight*heightDivider)/2f, 0f);
+            characterController.center = new Vector3(0f, -0.4f, 0f);
+
+            headCheck.localPosition = new Vector3(0f, 0.3f, 0f);
+
+            cameraLook.CrouchCameraPoistion();
             
             // TO DO!!!!
             // move the ground check because is going under the floor
@@ -190,10 +199,15 @@ public class PlayerMovement : MonoBehaviour
             updatedMovementSpeed = movementSpeed;
         }
 
-        if (!crouch && isHittingRoof == false)
+        if (!crouch && isHittingRoof == false) // not crouched
         {
             //transform.localScale = new Vector3(transform.localScale.x, originalHeight, transform.localScale.z);
             characterController.height = originalHeight;
+            characterController.center = new Vector3(0f, 0f, 0f);
+            
+            headCheck.localPosition = new Vector3(0f, 1, 0f);
+            
+            cameraLook.NormalCameraPosition();
         }
 
         
@@ -258,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerAnim.JumpAnimation();
             }
-            else if (crouch)
+            else if (Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.01f) // crouch
             {
                 playerAnim.CrouchWalkAnimation();
             }
@@ -277,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerAnim.JumpAnimation();
             }
-            else if (crouch)
+            else if (Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.01f) // crouch
             {
                 playerAnim.CrouchIdleAnimation();
             }
