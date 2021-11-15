@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
     private bool inRespawnTime;
 
     private Transform cameraHolder;
-    private Vector3 desiredPosition = new Vector3(0f, 2f, -1f);
+    private Vector3 desiredPosition = new Vector3(0f, 1.75f, -2f);
     private Vector3 initialPoistion;
     
 
@@ -61,6 +61,7 @@ public class PlayerManager : MonoBehaviour
 
             
             // animatie
+            PlayerAnimationController.Instance.FallAnimation();
             
             // particule
             
@@ -98,7 +99,7 @@ public class PlayerManager : MonoBehaviour
         {
             cameraHolder.localPosition =
                 Vector3.Lerp(cameraHolder.transform.localPosition, desiredPosition, 2f*Time.deltaTime);
-            var rot = Quaternion.Euler(60f, 0f, 0f);
+            var rot = Quaternion.Euler(75f, 0f, 0f);
             cameraHolder.localRotation = Quaternion.Lerp(cameraHolder.localRotation, rot, 2f*Time.deltaTime);
             
             time += Time.deltaTime;

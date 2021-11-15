@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 public class DoorTimer : MonoBehaviour
 {
+
+   
+
     [SerializeField] private int id;
 
     [SerializeField] private float timeToOpen = 5f;
 
     [SerializeField] private bool activateTimer;
-    
+
+    private Transform timerTrigger;
     private Transform timerObj;
 
     private Text timerText;
@@ -21,6 +25,9 @@ public class DoorTimer : MonoBehaviour
         var canv = transform.Find("Canvas");
         timerObj = canv.transform.Find("TimerText");
         timerText = timerObj.GetComponent<Text>();
+
+        var p = transform.parent;
+        timerTrigger = p.transform.Find("TimerTrigger");
 
         //timerText = timerObj.GetComponent<TextMesh>();
 
@@ -51,8 +58,18 @@ public class DoorTimer : MonoBehaviour
             yield return null;
         }
 
+        timerTrigger.gameObject.SetActive(false);
         timerText.text = "OPEN";
         GameEvents.Instance.DoorTriggerEnter(id);
+    }
+    
+    
+    public void ActivateTimer()
+    {
+        if (!activateTimer)
+        {
+            activateTimer = true;
+        }
     }
     
     

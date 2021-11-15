@@ -16,6 +16,7 @@ public class PlayerAnimationController : MonoBehaviour
     private const string PLAYER_CROUCH_WALK = "Crouch Walk State";
     private const string PLAYER_RUN = "Run State";
     private const string PLAYER_JUMP = "Jump State";
+    private const string PLAYER_FALL = "Fall State";
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class PlayerAnimationController : MonoBehaviour
     public void IdleAnimation() => anim.Play(PLAYER_IDLE);
     public void RunAnimation() => anim.Play(PLAYER_RUN);
     public void JumpAnimation() => anim.Play(PLAYER_JUMP);
+    public void FallAnimation() => anim.Play(PLAYER_FALL);
 
 
 

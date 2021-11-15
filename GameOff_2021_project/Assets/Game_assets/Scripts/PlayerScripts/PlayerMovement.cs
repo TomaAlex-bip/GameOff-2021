@@ -317,12 +317,7 @@ public class PlayerMovement : MonoBehaviour
             terrainLayerMask |= layer.value;
         }
     }
-
-
-    public void Respawn()
-    {
-        transform.position = Vector3.zero;
-    }
+    
 
 
 

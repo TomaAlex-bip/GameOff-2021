@@ -36,4 +36,13 @@ public class GameEvents : MonoBehaviour
         onDoorTriggerExit?.Invoke(id);
     }
 
+
+
+    public event Action<int> onTipTriggerEnter;
+
+    public void TipTriggerEnter(int id)
+    {
+        onTipTriggerEnter?.Invoke(id);
+    }
+
 }

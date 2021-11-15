@@ -81,9 +81,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -675410662158475780, guid: cc2f65d1c9f8aa448bc31de9682985cc, type: 3}
-  - {fileID: 4309141619009939873, guid: cc2f65d1c9f8aa448bc31de9682985cc, type: 3}
-  - {fileID: -3924456923955745658, guid: cc2f65d1c9f8aa448bc31de9682985cc, type: 3}
+  - {fileID: 2100000, guid: e2c6baeac726a4b4d98f3635b63e57ed, type: 2}
+  - {fileID: 2100000, guid: 13c6144fa88242f4a8bb50ff35005c7f, type: 2}
+  - {fileID: 2100000, guid: 1ee9d8dfa4fa41644bb4678c754b4b4f, type: 2}
   - {fileID: 7670857266687338686, guid: cc2f65d1c9f8aa448bc31de9682985cc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -519,7 +519,7 @@ MonoBehaviour:
   mouseSensitivity: 1.93
   minLookDown: 70
   maxLookUp: 90
-  cameraHolder: {fileID: 1631096158055778984}
+  crouchCameraPoistion: {x: 0, y: 0.08, z: 0.42}
 --- !u!114 &1673956163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHitPoints: 10
-  timeToRespawn: 5
+  timeToRespawn: 2
 --- !u!1 &1631096158055778987
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,9 +573,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631096158055778987}
-  m_LocalRotation: {x: 0.09772216, y: -0.000000059140646, z: -0.0000000075549105, w: 0.99521375}
-  m_LocalPosition: {x: 0, y: 0.11068761, z: 0.40283203}
-  m_LocalScale: {x: 23, y: 23, z: 23}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0.176}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1631096156789929115}
   m_Father: {fileID: 1631096157525358212}
