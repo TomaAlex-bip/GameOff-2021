@@ -8,17 +8,22 @@ public class CameraEffects : MonoBehaviour
 {
     public static CameraEffects Instance { get; private set; }
 
+    public bool ChangableFov {get; set; }
 
     [SerializeField] private float bobbingEffectSpeed = 1f;
     [SerializeField] private float bobbingEffectAmplitude = 0.05f;
 
     [SerializeField] private float fieldOfViewMultiplier = 1.2f;
-
+    
     //[SerializeField] private float cameraShakeAmplitude = 0.05f;
     //[SerializeField] private float cameraShakeTime = 1f;
 
+    [SerializeField] private float fovBugAmplifier = 1f;
+    [SerializeField] private float fovBugSpeed = 1f;
+
     private Vector3 initialPosition;
-    
+
+    private float timerFOV = 0;
     private float timer = 0;
     private float lerpSpeed = 5f;
     private float speedFactor;
@@ -28,6 +33,7 @@ public class CameraEffects : MonoBehaviour
     private Camera mainCamera;
     
     private PlayerMovement playerMovement;
+
 
     //private bool cameraShaking;
 
@@ -53,14 +59,18 @@ public class CameraEffects : MonoBehaviour
         mainCamera = GetComponent<Camera>();
         initialFOV = mainCamera.fieldOfView;
 
+        ChangableFov = true;
     }
 
 
     private void Update()
     {
         BobbingEffect();
-        
-        UpdateFieldOfView();
+
+        if (ChangableFov)
+        {
+            UpdateFieldOfView();
+        }
      
     }
 
@@ -97,6 +107,17 @@ public class CameraEffects : MonoBehaviour
                 lerpSpeed * Time.deltaTime);
         }
     }
+    
+    
+    public float FieldOfViewBugEffect()
+    {
+        timerFOV += Time.deltaTime * fovBugSpeed;
+        var newFOV = initialFOV + Mathf.Abs(Mathf.Sin(timerFOV)) * fovBugAmplifier;
+
+        var fov = Mathf.Lerp(mainCamera.fieldOfView, newFOV, lerpSpeed * Time.deltaTime);
+
+        return fov;
+    }
 
 
     private void UpdateFieldOfView()
@@ -104,18 +125,19 @@ public class CameraEffects : MonoBehaviour
         // player should be moving faster than normal, either on the ground or midair
         if (playerMovement.Sprinting)
         {
-            mainCamera.fieldOfView = Mathf.Lerp( 
-                mainCamera.fieldOfView, 
-                initialFOV * fieldOfViewMultiplier, 
+            mainCamera.fieldOfView = Mathf.Lerp(
+                mainCamera.fieldOfView,
+                initialFOV * fieldOfViewMultiplier,
                 lerpSpeed * Time.deltaTime);
         }
         else
         {
-            mainCamera.fieldOfView = Mathf.Lerp( 
-                mainCamera.fieldOfView, 
-                initialFOV, 
+            mainCamera.fieldOfView = Mathf.Lerp(
+                mainCamera.fieldOfView,
+                initialFOV,
                 lerpSpeed * Time.deltaTime);
         }
+        
     }
 
 

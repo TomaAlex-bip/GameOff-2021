@@ -28,6 +28,7 @@ public class ProjectileBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
+       
         switch (other.tag)
         {
             case "Player":
@@ -41,7 +42,11 @@ public class ProjectileBehaviour : MonoBehaviour
             case "Projectile":
                 break;
             
+            case "EffectsTrigger":
+                break;
+            
             default:
+                print("proiectilu loveste " + other.gameObject);
                 Destroy(gameObject);
                 break;
         }

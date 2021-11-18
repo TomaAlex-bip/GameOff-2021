@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         get => !isGrounded;
     }
 
+
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
 
@@ -103,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        
         cameraLook = transform.GetComponent<CameraLook>();
         
         characterController = GetComponent<CharacterController>();
@@ -149,8 +151,10 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement = Input.GetAxis("Vertical");
         
         jump = Input.GetKeyDown(KeyCode.Space);
+
         
-        sprint = Input.GetKey(KeyCode.LeftShift);
+        sprint = Input.GetKey(KeyCode.LeftShift); 
+        
         
         crouch = Input.GetKey(KeyCode.LeftControl) ||  Input.GetKey(KeyCode.C);
         

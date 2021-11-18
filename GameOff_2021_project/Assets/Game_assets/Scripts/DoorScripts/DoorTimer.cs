@@ -19,7 +19,9 @@ public class DoorTimer : MonoBehaviour
     private Transform timerObj;
 
     private Text timerText;
-    
+
+    private bool timerActivated = false;
+
     private void Start()
     {
         var canv = transform.Find("Canvas");
@@ -29,14 +31,17 @@ public class DoorTimer : MonoBehaviour
         var p = transform.parent;
         timerTrigger = p.transform.Find("TimerTrigger");
 
-        //timerText = timerObj.GetComponent<TextMesh>();
+        timerText.text = "CLOSED";
+
+
 
     }
 
     private void Update()
     {
-        if (activateTimer)
+        if (activateTimer && !timerActivated)
         {
+            timerActivated = true;
             activateTimer = false;
             StartCoroutine(TimerCoroutine());
         }

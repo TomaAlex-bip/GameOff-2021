@@ -66,14 +66,6 @@ public class PlayerManager : MonoBehaviour
             // particule
             
             
-            // disable movement
-            var cameraLook = transform.GetComponent<CameraLook>();
-            var movement = transform.GetComponent<PlayerMovement>();
-            var characterController = transform.GetComponent<CharacterController>();
-            characterController.enabled = false;
-            cameraLook.enabled = false;
-            movement.enabled = false;
-            
             StartCoroutine(RespawnCoroutine());
 
         }
@@ -88,12 +80,25 @@ public class PlayerManager : MonoBehaviour
             
             checkPoint = spawnPoint.position + new Vector3(0f, 2f, 0f);
         }
+
+        if (other.CompareTag("Respawn"))
+        {
+            PlayerAnimationController.Instance.FallAnimation();
+            StartCoroutine(RespawnCoroutine());
+        }
     }
 
 
 
     private IEnumerator RespawnCoroutine()
     {
+        var cameraLook = transform.GetComponent<CameraLook>();
+        var movement = transform.GetComponent<PlayerMovement>();
+        var characterController = transform.GetComponent<CharacterController>();
+        characterController.enabled = false;
+        cameraLook.enabled = false;
+        movement.enabled = false;
+        
         var time = 0f;
         while (time <= timeToRespawn)
         {
@@ -112,9 +117,9 @@ public class PlayerManager : MonoBehaviour
         cameraHolder.localPosition = initialPoistion;
         cameraHolder.localRotation = Quaternion.identity;
 
-        var cameraLook = transform.GetComponent<CameraLook>();
-        var movement = transform.GetComponent<PlayerMovement>();
-        var characterController = transform.GetComponent<CharacterController>();
+        cameraLook = transform.GetComponent<CameraLook>();
+        movement = transform.GetComponent<PlayerMovement>();
+        characterController = transform.GetComponent<CharacterController>();
         characterController.enabled = true;
         cameraLook.enabled = true;
         movement.enabled = true;

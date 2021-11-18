@@ -93,15 +93,14 @@ public class EnemyTargeting : MonoBehaviour
 
         if (currentDistance <= minDistanceToShoot)
         {
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, minDistanceToShoot,
-                layerForTargeting)) //TO DO: add a mask !!!
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, minDistanceToShoot, layerForTargeting))
             {
                 if (hitInfo.collider.CompareTag("Player") && !PlayerManager.Instance.InRespawnTime)
                 {
                     if (reloaded)
                     {
-                        StartCoroutine(Reload());
                         Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
+                        StartCoroutine(Reload());
 
                         //TO DO: instantiate particles
 
@@ -116,7 +115,9 @@ public class EnemyTargeting : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        //print("reloading");
         yield return new WaitForSeconds(reloadTime);
+        //print("finished reloading");
         reloaded = true;
     }
     
