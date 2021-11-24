@@ -24,6 +24,9 @@ public class TriggerButton : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        GameEvents.Instance.DoorTriggerExit(id);
+        if (GameManager.Instance.GameIsOn)
+        {
+            GameEvents.Instance.DoorTriggerExit(id);
+        }
     }
 }

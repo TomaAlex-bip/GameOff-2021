@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public float EffectsVolume { get => effectsVolume; }
     public float VoiceVolume { get => voiceVolume; }
 
+    public bool GameIsOn { get; set; }
+
     [SerializeField] private Slider mouseSensitivitySlider;
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider effectsVolumeSlider;

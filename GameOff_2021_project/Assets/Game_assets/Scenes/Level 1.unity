@@ -2135,11 +2135,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5349537730821109906, guid: b58badd204e270047a2f14b4d4a71b08, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5349537730894548107, guid: b58badd204e270047a2f14b4d4a71b08, type: 3}
       propertyPath: m_Name
       value: PauseMenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349537730894548118, guid: b58badd204e270047a2f14b4d4a71b08, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5349537730894548119, guid: b58badd204e270047a2f14b4d4a71b08, type: 3}
       propertyPath: m_Pivot.x
@@ -2151,7 +2155,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5349537730894548119, guid: b58badd204e270047a2f14b4d4a71b08, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5349537730894548119, guid: b58badd204e270047a2f14b4d4a71b08, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2486,8 +2490,8 @@ CanvasGroup:
   m_GameObject: {fileID: 173941432}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &173941437
 MonoBehaviour:
@@ -7676,8 +7680,8 @@ CanvasGroup:
   m_GameObject: {fileID: 433058116}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &433058121
 MonoBehaviour:
@@ -8331,7 +8335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -10683,7 +10687,7 @@ RectTransform:
   - {fileID: 1889881604}
   - {fileID: 173941433}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -20428,8 +20432,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1466396991}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1466396996
 MonoBehaviour:
@@ -29894,8 +29898,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1889881603}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1889881608
 MonoBehaviour:
@@ -29963,7 +29967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

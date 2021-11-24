@@ -18,8 +18,6 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private Object firstLevel;
 
-    [SerializeField] private GameObject secondaryCanvas;
-
     private Image currentPanel;
 
     private bool inTransition = false;
@@ -56,8 +54,12 @@ public class MenuController : MonoBehaviour
                 var camLook = player.GetComponent<CameraLook>();
                 camLook.enabled = !menuOn;
                 mainPanel.gameObject.SetActive(menuOn);
-                secondaryCanvas.SetActive(!menuOn);
+                
                 Cursor.lockState = menuOn ? CursorLockMode.None : CursorLockMode.Locked;
+
+                GameManager.Instance.GameIsOn = !menuOn;
+                //Time.timeScale = menuOn ? 0f : 1f;
+
             }
 
             
@@ -159,8 +161,12 @@ public class MenuController : MonoBehaviour
         var camLook = player.GetComponent<CameraLook>();
         camLook.enabled = !menuOn;
         mainPanel.gameObject.SetActive(menuOn);
-        secondaryCanvas.SetActive(!menuOn);
+        
         Cursor.lockState = menuOn ? CursorLockMode.None : CursorLockMode.Locked;
+        
+        GameManager.Instance.GameIsOn = !menuOn;
+        
+        //Time.timeScale = menuOn ? 0f : 1f;
     }
 
 }
