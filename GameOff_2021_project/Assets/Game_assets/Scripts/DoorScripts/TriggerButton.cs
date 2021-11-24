@@ -9,7 +9,17 @@ public class TriggerButton : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        //GameEvents.Instance.DoorTriggerEnter(id);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
         GameEvents.Instance.DoorTriggerEnter(id);
+    }
+
+    private void Update()
+    {
+        //GameEvents.Instance.DoorTriggerExit(id);
     }
 
     private void OnTriggerExit(Collider other)

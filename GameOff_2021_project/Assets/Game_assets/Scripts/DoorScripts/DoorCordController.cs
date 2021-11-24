@@ -9,11 +9,13 @@ public class DoorCordController : MonoBehaviour
 
     [SerializeField] private int id;
 
-    [SerializeField] private Color onColor;
-    [SerializeField] private Color offColor;
+    [SerializeField] private float emmisionIntensity = 2f;
+    [SerializeField] private Color onColor = Color.green;
+    [SerializeField] private Color offColor = Color.red;
     
     
     private List<Transform> cords = new List<Transform>();
+    private static readonly int EmmisionColor = Shader.PropertyToID("_EmmisionColor");
 
 
     private void Start()
@@ -46,7 +48,9 @@ public class DoorCordController : MonoBehaviour
                 var mat = cord.GetComponent<Renderer>().material;
                 if (mat != null)
                 {
-                    mat.color = onColor;
+                    mat.color = onColor * emmisionIntensity;
+                    mat.SetColor(EmmisionColor, onColor * emmisionIntensity);
+                    mat.EnableKeyword("_EMISSION");
                 }
             }
         }
@@ -64,7 +68,9 @@ public class DoorCordController : MonoBehaviour
                 var mat = cord.GetComponent<Renderer>().material;
                 if (mat != null)
                 {
-                    mat.color = offColor;
+                    mat.color = offColor * emmisionIntensity;
+                    mat.SetColor(EmmisionColor, offColor * emmisionIntensity);
+                    mat.EnableKeyword("_EMISSION");
                 }
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraLook : MonoBehaviour
 {
-    [Range(0f, 5f)]
+    [Range(0f, 10f)]
     [SerializeField] private float mouseSensitivity;
 
     [SerializeField] private float minLookDown = 80f;
@@ -33,6 +33,7 @@ public class CameraLook : MonoBehaviour
 
     private void Update()
     {
+        mouseSensitivity = GameManager.Instance.MouseSensitivity;
 
         GetInput();
         
@@ -57,8 +58,8 @@ public class CameraLook : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    public void NormalCameraPosition() => cameraHolder.localPosition = initialCamPos;
+    public void NormalCameraPosition() => cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, initialCamPos, 5f*Time.deltaTime);
 
-    public void CrouchCameraPoistion() => cameraHolder.localPosition = crouchCameraPoistion;
+    public void CrouchCameraPoistion() => cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, crouchCameraPoistion, 5f*Time.deltaTime);
 
 }

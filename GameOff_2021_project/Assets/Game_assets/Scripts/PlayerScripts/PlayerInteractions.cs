@@ -19,8 +19,8 @@ public class PlayerInteractions : MonoBehaviour
     
     void Start()
     {
-        objectHolder = transform.Find("ObjectHolder");
         mainCamera = transform.Find("CameraHolder");
+        objectHolder = transform.Find("ObjectHolder");
     }
 
     void Update()
@@ -57,6 +57,12 @@ public class PlayerInteractions : MonoBehaviour
     {
         if (hasObject && objectInHand != null)
         {
+
+            objectInHand.transform.position = objectHolder.transform.position;
+            
+            objectInHand.transform.rotation = objectHolder.transform.rotation;
+
+
             var col = objectInHand.GetComponent<BoxCollider>();
             if (col != null)
             {
@@ -68,22 +74,22 @@ public class PlayerInteractions : MonoBehaviour
             {
                 rb.isKinematic = true;
             }
-
-            objectInHand.SetParent(objectHolder);
-            objectInHand.localPosition = Vector3.zero;
-            objectInHand.localRotation = Quaternion.identity;
+            
+            //objectInHand.SetParent(objectHolder);
+            //objectInHand.localPosition = Vector3.zero;
+            //objectInHand.localRotation = Quaternion.identity;
         }
 
         if (!hasObject && objectInHand != null)
         {
-            objectInHand.SetParent(null);
+            //objectInHand.SetParent(null);
             
             var col = objectInHand.GetComponent<BoxCollider>();
             if (col != null)
             {
                 col.enabled = true;
             }
-
+            
             var rb = objectInHand.GetComponent<Rigidbody>();
             if (rb != null)
             {

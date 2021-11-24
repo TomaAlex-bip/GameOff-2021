@@ -42,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
         get => !isGrounded;
     }
 
+    public bool InfiniteJumps { get; set; }
+    public bool InvertControls { get; set; }
+
 
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float jumpHeight = 2f;
@@ -132,8 +135,12 @@ public class PlayerMovement : MonoBehaviour
         CheckGrounding();  // check if the character is on ground
         
         CheckHittingRoof();
+
         
-        //isGrounded = true;   // for infinite jumps bug
+        if (InfiniteJumps)  // for infinite jumps bug
+        {
+            isGrounded = true;
+        }
         UpdateJumping();
         
         UpdateMovementSpeed();
@@ -147,43 +154,34 @@ public class PlayerMovement : MonoBehaviour
 
     private void GetInput()
     {
-        horizontalMovement = Input.GetAxis("Horizontal");
-        verticalMovement = Input.GetAxis("Vertical");
+        if (InvertControls)
+        {
+            horizontalMovement = -Input.GetAxis("Horizontal");
+            verticalMovement = -Input.GetAxis("Vertical");
+            sprint = Input.GetKeyDown(KeyCode.Space);
+            jump = Input.GetKey(KeyCode.LeftShift);
+        }
+        else
+        {
+            horizontalMovement = Input.GetAxis("Horizontal");
+            verticalMovement = Input.GetAxis("Vertical");
+            jump = Input.GetKeyDown(KeyCode.Space);
+            sprint = Input.GetKey(KeyCode.LeftShift);
+        }
         
-        jump = Input.GetKeyDown(KeyCode.Space);
+        crouch = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C);
 
-        
-        sprint = Input.GetKey(KeyCode.LeftShift); 
-        
-        
-        crouch = Input.GetKey(KeyCode.LeftControl) ||  Input.GetKey(KeyCode.C);
-        
     }
 
 
     private void UpdateMovementSpeed()  // update the speed based on different factors, such as sprinting, crouching, being in midair, etc...
     {
-        if (crouch) // crouched
+        
+        if (crouch && isGrounded) // crouched
         {
             updatedMovementSpeed = movementSpeed * crouchMultiplier;
-            
-            // !!!!! BUG: micsoareaza sau mareste si cutia pe care o tine playerul !!!!!!!
-            //transform.localScale = new Vector3(transform.localScale.x, originalHeight / 2f, transform.localScale.z);
-            // sa ma gandesc daca il las sau nu, pare un feature interesant
-
-            characterController.height = originalHeight * heightDivider;
-            //characterController.center = new Vector3(0f, -(originalHeight*heightDivider)/2f, 0f);
-            characterController.center = new Vector3(0f, -0.4f, 0f);
-
-            headCheck.localPosition = new Vector3(0f, 0.3f, 0f);
-
-            cameraLook.CrouchCameraPoistion();
-            
-            // TO DO!!!!
-            // move the ground check because is going under the floor
-
         }
-        else if (isHittingRoof && Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.01f)
+        else if (isHittingRoof && Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.5f)
         {
            updatedMovementSpeed = movementSpeed * crouchMultiplier;
         }
@@ -198,15 +196,59 @@ public class PlayerMovement : MonoBehaviour
                 updatedMovementSpeed = movementSpeed;
             }
         }
-        else if (!sprint) 
+        else if (!sprint && isGrounded) 
         {
             updatedMovementSpeed = movementSpeed;
         }
+        
+        
+        
+        // GOOD VERSION
+        
+        // if (crouch && isGrounded) // crouched
+        // {
+        //     updatedMovementSpeed = movementSpeed * crouchMultiplier;
+        // }
+        // else if (isHittingRoof && Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.5f)
+        // {
+        //     updatedMovementSpeed = movementSpeed * crouchMultiplier;
+        // }
+        // else if (sprint && isGrounded || sprint && jump)
+        // {
+        //     if (verticalMovement > 0f)
+        //     {
+        //         updatedMovementSpeed = movementSpeed * sprintMultiplier;
+        //     }
+        //     else
+        //     {
+        //         updatedMovementSpeed = movementSpeed;
+        //     }
+        // }
+        // else if (!sprint) 
+        // {
+        //     updatedMovementSpeed = movementSpeed;
+        // }
 
+        if (crouch)
+        {
+            // !!!!! BUG: micsoareaza sau mareste si cutia pe care o tine playerul !!!!!!!
+            //transform.localScale = new Vector3(transform.localScale.x, originalHeight / 2f, transform.localScale.z);
+            // sa ma gandesc daca il las sau nu, pare un feature interesant
+
+            characterController.height = Mathf.Lerp(characterController.height, originalHeight * heightDivider, 5f*Time.deltaTime);
+            //characterController.height = originalHeight * heightDivider;
+            characterController.center = new Vector3(0f, -0.4f, 0f);
+
+            headCheck.localPosition = new Vector3(0f, 0.3f, 0f);
+
+            cameraLook.CrouchCameraPoistion();
+        }
+        
         if (!crouch && isHittingRoof == false) // not crouched
         {
             //transform.localScale = new Vector3(transform.localScale.x, originalHeight, transform.localScale.z);
-            characterController.height = originalHeight;
+            characterController.height = Mathf.Lerp(characterController.height, originalHeight, 5f*Time.deltaTime);
+            //characterController.height = originalHeight;
             characterController.center = new Vector3(0f, 0f, 0f);
             
             headCheck.localPosition = new Vector3(0f, 1, 0f);

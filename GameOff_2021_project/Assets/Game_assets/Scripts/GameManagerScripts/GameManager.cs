@@ -2,38 +2,82 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private List<Transform> rooms;
+    public static GameManager Instance { get; private set; }
 
-    [SerializeField] private List<Transform> triggers;
+    public float MouseSensitivity { get => mouseSensitivity; }
+    public float MusicVolume { get => musicVolume; }
+    public float EffectsVolume { get => effectsVolume; }
+    public float VoiceVolume { get => voiceVolume; }
 
-    private List<RoomTrigger> roomTriggers;
+    [SerializeField] private Slider mouseSensitivitySlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider effectsVolumeSlider;
+    [SerializeField] private Slider voiceVolumeSlider;
+
+    [SerializeField] private float mouseSensitivity;
+    [SerializeField] private float musicVolume;
+    [SerializeField] private float effectsVolume;
+    [SerializeField] private float voiceVolume;
+
+    [SerializeField] private List<string> musicNames;
+    [SerializeField] private List<string> effectsNames;
+    [SerializeField] private List<string> voiceNames;
+
+
+    private List<Sound> sounds;
     
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        DontDestroyOnLoad(gameObject);
+        
+    }
+
     private void Start()
     {
-        roomTriggers = new List<RoomTrigger>();
-        
-        foreach (var level in rooms)
-        {
-            level.gameObject.SetActive(false);
-        }
-
-        foreach (var trigger in triggers)
-        {
-            roomTriggers.Add(trigger.GetComponent<RoomTrigger>());
-        }
-        
+        sounds = SoundManager.Instance.sounds;
     }
 
 
     private void Update()
     {
-        for (var i = 0; i < roomTriggers.Count; i++)
+        mouseSensitivity = mouseSensitivitySlider.value;
+        musicVolume = musicVolumeSlider.value;
+        effectsVolume = effectsVolumeSlider.value;
+        voiceVolume = voiceVolumeSlider.value;
+    }
+    
+    
+    public void UpdateSliders(Slider mouseSensitivitySlider, Slider musicVolumeSlider, Slider effectsVolumeSlider, Slider voiceVolumeSlider)
+    {
+        this.mouseSensitivitySlider = mouseSensitivitySlider;
+        this.musicVolumeSlider = musicVolumeSlider;
+        this.effectsVolumeSlider = effectsVolumeSlider;
+        this.voiceVolumeSlider = voiceVolumeSlider;
+
+        if (SceneManager.GetActiveScene().buildIndex > 0)
         {
-            rooms[i].gameObject.SetActive(roomTriggers[i].PlayerInside);
+            this.mouseSensitivitySlider.value = mouseSensitivity;
+            this.musicVolumeSlider.value = musicVolume;
+            this.effectsVolumeSlider.value = effectsVolume;
+            this.voiceVolumeSlider.value = voiceVolume;
         }
     }
+    
 }
