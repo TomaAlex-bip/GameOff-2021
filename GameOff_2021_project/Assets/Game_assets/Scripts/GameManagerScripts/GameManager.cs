@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float VoiceVolume { get => voiceVolume; }
 
     public bool GameIsOn { get; set; }
+    public bool FinalLevel { get; set; }
 
     [SerializeField] private Slider mouseSensitivitySlider;
     [SerializeField] private Slider musicVolumeSlider;
@@ -54,6 +55,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         sounds = SoundManager.Instance.sounds;
+        
+        SoundManager.Instance.PlaySound("m_MainMenu_theme");
+        
     }
 
 
@@ -63,6 +67,11 @@ public class GameManager : MonoBehaviour
         musicVolume = musicVolumeSlider.value;
         effectsVolume = effectsVolumeSlider.value;
         voiceVolume = voiceVolumeSlider.value;
+
+
+        
+        
+        
     }
     
     

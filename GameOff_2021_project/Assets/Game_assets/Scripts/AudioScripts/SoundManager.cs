@@ -43,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        PlaySound("m_theme");
+        PlaySound("m_MainMenu_theme");
     }
 
     private void Update()
@@ -113,8 +113,29 @@ public class SoundManager : MonoBehaviour
             playSound.AudioSource.PlayDelayed(delay);
         }
     }
-    
-    
+
+
+    public void StopSound(string soundName)
+    {
+        Sound playSound = null;
+        foreach (var sound in sounds)
+        {
+            if (sound.Name == soundName)
+            {
+                playSound = sound;
+                break;
+            }
+        }
+
+        if (playSound == null)
+        {
+            Debug.LogWarning("Sound " + soundName + " not found!");
+        }
+        else
+        {
+            playSound.AudioSource.Stop();
+        }
+    }
     
     
 }

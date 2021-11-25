@@ -102,6 +102,8 @@ public class EnemyTargeting : MonoBehaviour
                         Instantiate(projectile, shootPoint.transform.position, shootPoint.transform.rotation);
                         StartCoroutine(Reload());
 
+                        SoundManager.Instance.PlaySound("e_enemy_laser");
+                        
                         //TO DO: instantiate particles
 
                         reloaded = false;
