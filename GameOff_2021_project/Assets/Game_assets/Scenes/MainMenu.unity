@@ -2187,9 +2187,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: m_theme
-    audioClip: {fileID: 8300000, guid: 41e27710309f1de479be82810a69ddb6, type: 3}
-    volume: 0
+  - name: m_MainMenu_theme
+    audioClip: {fileID: 8300000, guid: cf8438f9cbef06349abad39c802f88c0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: m_ambiental_1
+    audioClip: {fileID: 8300000, guid: 92eaa505329f48e41b9e13a5fba4f186, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: m_ambiental_2
+    audioClip: {fileID: 8300000, guid: 933169287eede9e47b2ef1572228d17c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: m_ambiental_3
+    audioClip: {fileID: 8300000, guid: 4ce980d0198566947a75fa925cc95b2b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: m_fov_room
+    audioClip: {fileID: 8300000, guid: 2a3a572f2e26907489070c29ae03407e, type: 3}
+    volume: 1
     pitch: 1
     loop: 1
   - name: e_enemy_laser
@@ -2197,11 +2217,36 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
-  - name: m_MainMenu_theme
-    audioClip: {fileID: 8300000, guid: cf8438f9cbef06349abad39c802f88c0, type: 3}
+  - name: e_info_sound
+    audioClip: {fileID: 8300000, guid: c7222c489e920164aa4d4714ee8c21ec, type: 3}
     volume: 1
     pitch: 1
-    loop: 1
+    loop: 0
+  - name: e_step_sound_1
+    audioClip: {fileID: 8300000, guid: ed0a3b368ea37a141be790d1a66eff7d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_2
+    audioClip: {fileID: 8300000, guid: 8212b55cdf1834f43bd16470f5fabf64, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_3
+    audioClip: {fileID: 8300000, guid: e8cd0a9416212d54981869cdeb7701c4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_4
+    audioClip: {fileID: 8300000, guid: f8bc8c7d2b35c314ea0a343c50994565, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_5
+    audioClip: {fileID: 8300000, guid: f5003b3557b11af419ec55312e58f0fe, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
 --- !u!1001 &1416414581
 PrefabInstance:
   m_ObjectHideFlags: 0

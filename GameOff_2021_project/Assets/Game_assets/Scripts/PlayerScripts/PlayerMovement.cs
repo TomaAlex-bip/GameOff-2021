@@ -77,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGrounded;
     private bool isHittingRoof;
+
+    private bool stepDone = true;
     
 
     private Vector3 velocity;
@@ -309,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // nu e bine
+    // nu e bine, ba chiar e bine
     private void UpdateAnimations()
     {
         if (horizontalMovement != 0 || verticalMovement != 0)
@@ -317,18 +319,25 @@ public class PlayerMovement : MonoBehaviour
             if (!isGrounded)
             {
                 playerAnim.JumpAnimation();
+                
             }
             else if (Mathf.Abs(characterController.height - (originalHeight * heightDivider)) < 0.01f) // crouch
             {
                 playerAnim.CrouchWalkAnimation();
+                MakeStepSound(0.75f);
+                //print("crouch step in apel");
             }
             else if (sprint)
             {
                 playerAnim.RunAnimation();
+                MakeStepSound(0.25f);
+                //print("run step in apel");
             }
             else
             {
                 playerAnim.WalkAnimation();
+                MakeStepSound(0.35f);
+                //print("walk step in apel");
             }
         }
         else
@@ -363,10 +372,27 @@ public class PlayerMovement : MonoBehaviour
             terrainLayerMask |= layer.value;
         }
     }
-    
 
 
 
+    private void MakeStepSound(float delay)
+    {
+        //print("step in functie fara nimic");
+        if (stepDone)
+        {
+            print("step in functie daca stepDone");
+            stepDone = false;
+            StartCoroutine(StepCoroutine(delay));
+        }
+    }
+
+    private IEnumerator StepCoroutine(float delay)
+    {
+        SoundManager.Instance.PlayRandomStepSound();
+        yield return new WaitForSeconds(delay);
+        //print("step in corutina");
+        stepDone = true;
+    }
 
 
 }

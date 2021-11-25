@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
 
     public static SoundManager Instance { get; private set; }
-    
+
 
     [SerializeField] public List<Sound> sounds;
 
-    
-    
+
+    private AudioSource currentAmbientalSound = null;
+
+    private bool stepDone;
 
     private void Awake()
     {
@@ -136,6 +139,62 @@ public class SoundManager : MonoBehaviour
             playSound.AudioSource.Stop();
         }
     }
+
+
+
+    private void PlayRandomSound(string soundNamePrefix)
+    {
+        if (currentAmbientalSound != null)
+        {
+            if (currentAmbientalSound.isPlaying)
+            {
+                return;
+            }
+        }
+        
+        List<Sound> playSounds = new List<Sound>();
+        foreach (var sound in sounds)
+        {
+            if (sound.Name.Contains(soundNamePrefix))
+            {
+                playSounds.Add(sound);
+            }
+        }
+
+        if (playSounds.Count <= 0)
+        {
+            Debug.LogWarning("Sound " + soundNamePrefix + " not found!");
+        }
+        else
+        {
+            var rng = Random.Range(0, playSounds.Count);
+            var playSound = playSounds[rng];
+            playSound.AudioSource.Play();
+            currentAmbientalSound = playSound.AudioSource;
+        }
+        
+    }
+
+    public void PlayRandomAmbientSound() => PlayRandomSound("m_ambiental");
+    
+    public void StopCurrenAmbientalSound() => currentAmbientalSound.Stop();
+
+    public void PlayRandomStepSound()
+    {
+        var rng = Random.Range(1, 5);
+
+        var stepSound = "e_step_sound_" + rng;
+        
+        PlaySound(stepSound);
+    }
+    
+    //public void PlayRandomStepSound() => PlaySound("e_step_sound_1");
+
+
+    
     
     
 }
+
+
+

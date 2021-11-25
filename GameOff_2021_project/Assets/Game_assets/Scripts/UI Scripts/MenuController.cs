@@ -157,6 +157,8 @@ public class MenuController : MonoBehaviour
     public void OnYesMenuButton()
     {
         SceneManager.LoadScene(0);
+        SoundManager.Instance.StopCurrenAmbientalSound();
+        SoundManager.Instance.PlaySound("m_MainMenu_theme");
     }
 
     public void OnContinueButton()

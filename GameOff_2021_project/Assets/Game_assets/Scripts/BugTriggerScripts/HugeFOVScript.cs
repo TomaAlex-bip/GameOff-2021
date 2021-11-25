@@ -58,6 +58,11 @@ public class HugeFOVScript : MonoBehaviour
             }
 
         }
+
+        GameManager.Instance.FovRoom = true;
+        
+        
+
     }
     
     
@@ -79,8 +84,10 @@ public class HugeFOVScript : MonoBehaviour
             {
                 paniniProjection.active = false;
             }
-            
-            
+
+            GameManager.Instance.FovRoom = false;
+            SoundManager.Instance.StopSound("m_fov_room");
+
         }
     }
     

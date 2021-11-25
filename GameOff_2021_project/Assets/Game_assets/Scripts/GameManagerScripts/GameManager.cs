@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public bool GameIsOn { get; set; }
     public bool FinalLevel { get; set; }
+    public bool FovRoom { get; set; }
 
     [SerializeField] private Slider mouseSensitivitySlider;
     [SerializeField] private Slider musicVolumeSlider;
@@ -34,7 +35,9 @@ public class GameManager : MonoBehaviour
 
 
     private List<Sound> sounds;
-    
+
+
+    private bool fovSoundOn = false;
 
     private void Awake()
     {
@@ -69,6 +72,20 @@ public class GameManager : MonoBehaviour
         voiceVolume = voiceVolumeSlider.value;
 
 
+        
+        if (SceneManager.GetActiveScene().buildIndex > 0)
+        {
+            if (FovRoom && !fovSoundOn)
+            {
+                fovSoundOn = true;
+                SoundManager.Instance.StopCurrenAmbientalSound();
+                SoundManager.Instance.PlaySound("m_fov_room");
+            }
+            else
+            {
+                SoundManager.Instance.PlayRandomAmbientSound();
+            }
+        }
         
         
         

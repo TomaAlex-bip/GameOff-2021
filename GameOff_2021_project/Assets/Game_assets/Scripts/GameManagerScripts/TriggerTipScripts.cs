@@ -12,6 +12,7 @@ public class TriggerTipScripts : MonoBehaviour
         {
             GameEvents.Instance.TipTriggerEnter(id);
             gameObject.SetActive(false);
+            SoundManager.Instance.PlaySound("e_info_sound");
         }
     }
 }
