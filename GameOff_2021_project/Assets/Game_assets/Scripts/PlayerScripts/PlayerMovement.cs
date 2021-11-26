@@ -160,17 +160,15 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMovement = -Input.GetAxis("Horizontal");
             verticalMovement = -Input.GetAxis("Vertical");
-            sprint = Input.GetKeyDown(KeyCode.Space);
-            jump = Input.GetKey(KeyCode.LeftShift);
         }
         else
         {
             horizontalMovement = Input.GetAxis("Horizontal");
             verticalMovement = Input.GetAxis("Vertical");
-            jump = Input.GetKeyDown(KeyCode.Space);
-            sprint = Input.GetKey(KeyCode.LeftShift);
         }
         
+        jump = Input.GetKeyDown(KeyCode.Space);
+        sprint = Input.GetKey(KeyCode.LeftShift);
         crouch = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C);
 
     }

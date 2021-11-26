@@ -3656,8 +3656,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: These are PENIS. Avoid entering their line of sight, otherwise you will
-    be obliterated.
+  m_Text: Those are high DPM turrets. Avoid entering their line of sight, otherwise
+    you will be obliterated.
 --- !u!222 &229138994
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7471,6 +7471,200 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1600286553}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &390652320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 390652322}
+  - component: {fileID: 390652321}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &390652321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390652320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd25d1bf38300a94fb5571c372d30c11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: m_MainMenu_theme
+    audioClip: {fileID: 8300000, guid: cf8438f9cbef06349abad39c802f88c0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: m_ambiental_1
+    audioClip: {fileID: 8300000, guid: 92eaa505329f48e41b9e13a5fba4f186, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: m_ambiental_2
+    audioClip: {fileID: 8300000, guid: 933169287eede9e47b2ef1572228d17c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: m_ambiental_3
+    audioClip: {fileID: 8300000, guid: 4ce980d0198566947a75fa925cc95b2b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: m_fov_room
+    audioClip: {fileID: 8300000, guid: 2a3a572f2e26907489070c29ae03407e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: e_enemy_laser
+    audioClip: {fileID: 8300000, guid: e39370e344a7b0c4384c82a2a491ae2c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_info_sound
+    audioClip: {fileID: 8300000, guid: c7222c489e920164aa4d4714ee8c21ec, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_1
+    audioClip: {fileID: 8300000, guid: ed0a3b368ea37a141be790d1a66eff7d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_2
+    audioClip: {fileID: 8300000, guid: 8212b55cdf1834f43bd16470f5fabf64, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_3
+    audioClip: {fileID: 8300000, guid: e8cd0a9416212d54981869cdeb7701c4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_4
+    audioClip: {fileID: 8300000, guid: f8bc8c7d2b35c314ea0a343c50994565, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: e_step_sound_5
+    audioClip: {fileID: 8300000, guid: f5003b3557b11af419ec55312e58f0fe, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_1_1
+    audioClip: {fileID: 8300000, guid: 5df7ad6ec1901904daecc481e2581085, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_1_2
+    audioClip: {fileID: 8300000, guid: 0ded374c943bd6940995a30db426023b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_1_3
+    audioClip: {fileID: 8300000, guid: 2c933f10aac17a04190c404b76da9204, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_1_4
+    audioClip: {fileID: 8300000, guid: cffeedd2fbfc0bc4a808329589ce96f4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_1
+    audioClip: {fileID: 8300000, guid: 0c63b3baf42d9c04785097784ee3ba34, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_2
+    audioClip: {fileID: 8300000, guid: 8e63dce7f8eaad247a384542e21bf5bb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_3
+    audioClip: {fileID: 8300000, guid: e2a983253646826409234b74bdaddc39, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_4
+    audioClip: {fileID: 8300000, guid: 2f371d1b27652124e93fe0b203a90384, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_5
+    audioClip: {fileID: 8300000, guid: 4e2fb94dcb0557b4888f4de68b31db7b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_1
+    audioClip: {fileID: 8300000, guid: 5b30c06d115491840be77ffe40665ce3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_2
+    audioClip: {fileID: 8300000, guid: 1165348c56b7aeb438161bec8cf32819, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_3
+    audioClip: {fileID: 8300000, guid: 23969f3f70bf86246a13997c57d1e691, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_4
+    audioClip: {fileID: 8300000, guid: 168248104451d2b4095fbd61615abe60, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_1
+    audioClip: {fileID: 8300000, guid: 47fa27a37cd4e0143b7b2213511f10bf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_2
+    audioClip: {fileID: 8300000, guid: 81f40f27b28b8a649918b9881cf49b05, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_3
+    audioClip: {fileID: 8300000, guid: babd686767bfd154a9828bd225df2d72, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_4
+    audioClip: {fileID: 8300000, guid: 6a36e2f464db74b4f955c52f0416a1e0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_5
+    audioClip: {fileID: 8300000, guid: 5d4323c272cbbf7428dc11198d9b75c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+--- !u!4 &390652322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390652320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &408177711
 PrefabInstance:
@@ -27393,6 +27587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoiceTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 3560699708787663172, guid: 18811dbcba17efa4c811143a251dbf46, type: 3}
+      propertyPath: m_TagString
+      value: EffectsTrigger
+      objectReference: {fileID: 0}
     - target: {fileID: 3560699708787663173, guid: 18811dbcba17efa4c811143a251dbf46, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -30635,11 +30833,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1631096157525358212, guid: b1d93a005e3b75640a87ccf113e1bfd0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 13.33
       objectReference: {fileID: 0}
     - target: {fileID: 1631096157525358212, guid: b1d93a005e3b75640a87ccf113e1bfd0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -102.5
       objectReference: {fileID: 0}
     - target: {fileID: 1631096157525358212, guid: b1d93a005e3b75640a87ccf113e1bfd0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31958,6 +32156,10 @@ PrefabInstance:
     - target: {fileID: 1045844020158450559, guid: 7fb86442a28a58d408adeb41e28b86e3, type: 3}
       propertyPath: m_Name
       value: FinalLevelTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045844020158450559, guid: 7fb86442a28a58d408adeb41e28b86e3, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fb86442a28a58d408adeb41e28b86e3, type: 3}

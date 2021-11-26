@@ -158,6 +158,7 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene(0);
         SoundManager.Instance.StopCurrenAmbientalSound();
+        SoundManager.Instance.StopAllSounds();
         SoundManager.Instance.PlaySound("m_MainMenu_theme");
     }
 

@@ -187,8 +187,14 @@ public class SoundManager : MonoBehaviour
         
         PlaySound(stepSound);
     }
-    
-    //public void PlayRandomStepSound() => PlaySound("e_step_sound_1");
+
+    public void StopAllSounds()
+    {
+        foreach (var sound in sounds)
+        {
+            sound.AudioSource.Stop();
+        }
+    }
 
 
     

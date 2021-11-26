@@ -8505,6 +8505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoiceTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 3560699708787663172, guid: 18811dbcba17efa4c811143a251dbf46, type: 3}
+      propertyPath: m_TagString
+      value: EffectsTrigger
+      objectReference: {fileID: 0}
     - target: {fileID: 3560699708787663173, guid: 18811dbcba17efa4c811143a251dbf46, type: 3}
       propertyPath: m_RootOrder
       value: 20

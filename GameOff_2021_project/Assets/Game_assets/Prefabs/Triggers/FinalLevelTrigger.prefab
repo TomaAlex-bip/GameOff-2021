@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1045844020158450432}
   - component: {fileID: 1045844020158450433}
   - component: {fileID: 1045844020158450434}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FinalLevelTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,3 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d874b89b28ff74eaef8fed098a2dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene: {fileID: 0}
