@@ -5182,7 +5182,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433058116}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -9552,6 +9552,7 @@ MonoBehaviour:
   musicNames: []
   effectsNames: []
   voiceNames: []
+  nextLevel: 0
 --- !u!43 &892220452
 Mesh:
   m_ObjectHideFlags: 0

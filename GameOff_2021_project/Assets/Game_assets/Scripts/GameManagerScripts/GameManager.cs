@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<string> voiceNames;
 
 
+    [SerializeField] private bool nextLevel;
+
     private List<Sound> sounds;
 
 
@@ -86,6 +88,23 @@ public class GameManager : MonoBehaviour
                 SoundManager.Instance.PlayRandomAmbientSound();
             }
         }
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
+#if (UNITY_EDITOR)
+
+        if (nextLevel)
+        {
+            nextLevel = false;
+            SoundManager.Instance.StopAllSounds();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        
+        
+#endif
         
         
         
