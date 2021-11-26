@@ -13,6 +13,7 @@ public class FinalRoomTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SceneManager.LoadScene(nextScene.name);
+            SoundManager.Instance.StopAllSounds();
         }
     }
 }
