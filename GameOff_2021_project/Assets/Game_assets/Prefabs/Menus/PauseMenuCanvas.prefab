@@ -827,8 +827,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 582704fef9cce35468630505b3858cef, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -839,7 +839,22 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ceva interesant care sa ajute
+  m_Text: 'Welcome to the Environmental Bug Testing Center!
+
+
+    This game is about
+    finding bugs, glitches and exploits in order to solve the puzzles.
+
+    Some
+    bugs are mechanical, some are visual, and some are just random :))
+
+
+    Controls
+    are simple: "WASD" to move. "Mouse" to look  around. "LeftCtrl" or "C" to crouch,
+    "LeftShift" to sprint, and "Space" to jump.
+
+
+    Have Fun!'
 --- !u!1 &5349537730724350205
 GameObject:
   m_ObjectHideFlags: 0

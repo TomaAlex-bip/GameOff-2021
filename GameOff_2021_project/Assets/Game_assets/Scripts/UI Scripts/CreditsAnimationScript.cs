@@ -12,20 +12,33 @@ public class CreditsAnimationScript : MonoBehaviour
 
     [SerializeField] private float speed;
 
+    [SerializeField] private float finalThankYouDelay = 12f;
+
 
     private void Update()
     {
         transform.position += Vector3.up * speed * Time.deltaTime;
 
+        // print(transform.position.y);
 
-        if (transform.position.y >= 6000f)
+        if (transform.position.y >= 2000f)
         {
-            SceneManager.LoadScene(0);
+            SoundManager.Instance.PlaySound("FinalThankYou");
+            // print("ceva");
+            StartCoroutine(FinalTankYouCoroutine());
         }
         
         
     }
-    
-    
-    
+
+
+    private IEnumerator FinalTankYouCoroutine()
+    {
+        // print("aproape gata");
+        yield return new WaitForSeconds(finalThankYouDelay);
+        // print("gata");
+        SceneManager.LoadScene(0);
+    }
+
+
 }

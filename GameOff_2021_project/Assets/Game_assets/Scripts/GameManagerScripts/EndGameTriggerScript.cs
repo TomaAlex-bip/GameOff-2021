@@ -26,9 +26,9 @@ public class EndGameTriggerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
 
+        SoundManager.Instance.StopAllSounds();
         SceneManager.LoadScene(creditsScene.name);
         GameManager.Instance.FinalLevel = false;
-        SoundManager.Instance.StopAllSounds();
     }
     
 }

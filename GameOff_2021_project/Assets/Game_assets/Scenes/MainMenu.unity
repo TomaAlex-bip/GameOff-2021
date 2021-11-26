@@ -2337,6 +2337,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - name: FinalThankYou
+    audioClip: {fileID: 8300000, guid: 4a3afe3fe5a1abf4ea2508565fed314f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
 --- !u!1001 &1416414581
 PrefabInstance:
   m_ObjectHideFlags: 0
