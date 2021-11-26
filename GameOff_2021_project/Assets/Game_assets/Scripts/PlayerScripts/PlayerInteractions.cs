@@ -8,6 +8,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private LayerMask pickableObjectsLayerMask;
     [SerializeField] private float minDistanceToPickObject = 1.5f;
 
+    [SerializeField] private GameObject hintToDisplay;
 
 
     private bool hasObject;
@@ -16,11 +17,16 @@ public class PlayerInteractions : MonoBehaviour
     private Transform mainCamera;
 
     private Transform objectInHand;
+
+    private GameObject hint;
     
     void Start()
     {
         mainCamera = transform.Find("CameraHolder");
         objectHolder = transform.Find("ObjectHolder");
+
+        hint = Instantiate(hintToDisplay, transform);
+        hint.gameObject.SetActive(false);
     }
 
     void Update()
@@ -35,6 +41,8 @@ public class PlayerInteractions : MonoBehaviour
     {
         Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward) * minDistanceToPickObject, Color.green);
 
+        DrawHintObPickableObject();
+        
         if (!hasObject && Input.GetKeyDown(KeyCode.E))
         {
             var ray = new Ray(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward));
@@ -63,11 +71,11 @@ public class PlayerInteractions : MonoBehaviour
             objectInHand.transform.rotation = objectHolder.transform.rotation;
 
 
-            var col = objectInHand.GetComponent<BoxCollider>();
-            if (col != null)
-            {
-                col.enabled = false;
-            }
+            // var col = objectInHand.GetComponent<BoxCollider>();
+            // if (col != null)
+            // {
+            //     col.enabled = false;
+            // }
                 
             var rb = objectInHand.GetComponent<Rigidbody>();
             if (rb != null)
@@ -84,11 +92,11 @@ public class PlayerInteractions : MonoBehaviour
         {
             //objectInHand.SetParent(null);
             
-            var col = objectInHand.GetComponent<BoxCollider>();
-            if (col != null)
-            {
-                col.enabled = true;
-            }
+            // var col = objectInHand.GetComponent<BoxCollider>();
+            // if (col != null)
+            // {
+            //     col.enabled = true;
+            // }
             
             var rb = objectInHand.GetComponent<Rigidbody>();
             if (rb != null)
@@ -96,6 +104,32 @@ public class PlayerInteractions : MonoBehaviour
                 rb.isKinematic = false;
             }
         }
+    }
+
+
+
+    private void DrawHintObPickableObject()
+    {
+        if (hasObject)
+        {
+            hint.SetActive(false);
+            return;
+        }
+        
+
+        var ray = new Ray(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward));
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, minDistanceToPickObject, pickableObjectsLayerMask))
+        {
+            hint.SetActive(true);
+            hint.transform.position = hitInfo.transform.position + transform.up * 1f;
+        }
+        else
+        {
+            hint.SetActive(false);
+        }
+        
+        
+        
     }
     
 }

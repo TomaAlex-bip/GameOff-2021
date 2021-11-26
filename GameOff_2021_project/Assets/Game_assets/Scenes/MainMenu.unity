@@ -2247,6 +2247,91 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - name: v_level_1_1
+    audioClip: {fileID: 8300000, guid: 5df7ad6ec1901904daecc481e2581085, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_1_2
+    audioClip: {fileID: 8300000, guid: 0ded374c943bd6940995a30db426023b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_1_3
+    audioClip: {fileID: 8300000, guid: 2c933f10aac17a04190c404b76da9204, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_1
+    audioClip: {fileID: 8300000, guid: 0c63b3baf42d9c04785097784ee3ba34, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_2
+    audioClip: {fileID: 8300000, guid: 8e63dce7f8eaad247a384542e21bf5bb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_3
+    audioClip: {fileID: 8300000, guid: e2a983253646826409234b74bdaddc39, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_4
+    audioClip: {fileID: 8300000, guid: 2f371d1b27652124e93fe0b203a90384, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_2_5
+    audioClip: {fileID: 8300000, guid: 4e2fb94dcb0557b4888f4de68b31db7b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_1
+    audioClip: {fileID: 8300000, guid: 5b30c06d115491840be77ffe40665ce3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_2
+    audioClip: {fileID: 8300000, guid: 1165348c56b7aeb438161bec8cf32819, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_3
+    audioClip: {fileID: 8300000, guid: 23969f3f70bf86246a13997c57d1e691, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_3_4
+    audioClip: {fileID: 8300000, guid: 168248104451d2b4095fbd61615abe60, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_1
+    audioClip: {fileID: 8300000, guid: 47fa27a37cd4e0143b7b2213511f10bf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_2
+    audioClip: {fileID: 8300000, guid: 81f40f27b28b8a649918b9881cf49b05, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_3
+    audioClip: {fileID: 8300000, guid: babd686767bfd154a9828bd225df2d72, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_4
+    audioClip: {fileID: 8300000, guid: 6a36e2f464db74b4f955c52f0416a1e0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: v_level_4_5
+    audioClip: {fileID: 8300000, guid: 5d4323c272cbbf7428dc11198d9b75c9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
 --- !u!1001 &1416414581
 PrefabInstance:
   m_ObjectHideFlags: 0

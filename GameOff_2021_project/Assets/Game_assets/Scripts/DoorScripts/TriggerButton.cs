@@ -15,6 +15,7 @@ public class TriggerButton : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         GameEvents.Instance.DoorTriggerEnter(id);
+        // print("stay in trigger obj: " + other.name);
     }
 
     private void Update()
@@ -26,6 +27,7 @@ public class TriggerButton : MonoBehaviour
     {
         if (GameManager.Instance.GameIsOn)
         {
+            // print("exit from trigger obj: " + other.name);
             GameEvents.Instance.DoorTriggerExit(id);
         }
     }

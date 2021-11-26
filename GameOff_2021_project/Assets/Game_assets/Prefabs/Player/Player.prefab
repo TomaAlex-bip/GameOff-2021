@@ -537,7 +537,8 @@ MonoBehaviour:
   pickableObjectsLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  minDistanceToPickObject: 2
+  minDistanceToPickObject: 2.5
+  hintToDisplay: {fileID: 9187145740544577839, guid: f06c824f39264914d85b43ab624436d8, type: 3}
 --- !u!114 &6304188827886965305
 MonoBehaviour:
   m_ObjectHideFlags: 0

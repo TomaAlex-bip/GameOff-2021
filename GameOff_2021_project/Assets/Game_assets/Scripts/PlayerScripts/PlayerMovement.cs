@@ -380,7 +380,7 @@ public class PlayerMovement : MonoBehaviour
         //print("step in functie fara nimic");
         if (stepDone)
         {
-            print("step in functie daca stepDone");
+            //print("step in functie daca stepDone");
             stepDone = false;
             StartCoroutine(StepCoroutine(delay));
         }
