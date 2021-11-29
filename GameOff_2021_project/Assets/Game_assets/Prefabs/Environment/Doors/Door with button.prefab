@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  emmisionIntensity: 3
+  emmisionIntensity: 10
   onColor: {r: 0, g: 1, b: 0, a: 0}
   offColor: {r: 1, g: 0, b: 0, a: 0}
 --- !u!1 &6971836944403458820

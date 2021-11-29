@@ -34375,6 +34375,10 @@ PrefabInstance:
       propertyPath: id
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1826589081846063211, guid: 3420ad86a91ea37468d0064f5bdd400b, type: 3}
+      propertyPath: emmisionIntensity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3270747713056668077, guid: 3420ad86a91ea37468d0064f5bdd400b, type: 3}
       propertyPath: m_Layer
       value: 6
