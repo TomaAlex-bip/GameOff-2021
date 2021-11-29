@@ -38,7 +38,7 @@ public class Sound
     
     [Range(0f, 1f)]
     [SerializeField] private float volume = 0.5f;
-    [Range(.1f, 3f)]
+    [Range(-3f, 3f)]
     [SerializeField] private float pitch = 1f;
 
     [SerializeField] private bool loop = false;

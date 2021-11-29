@@ -84,7 +84,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: e2c6baeac726a4b4d98f3635b63e57ed, type: 2}
   - {fileID: 2100000, guid: 13c6144fa88242f4a8bb50ff35005c7f, type: 2}
   - {fileID: 2100000, guid: 1ee9d8dfa4fa41644bb4678c754b4b4f, type: 2}
-  - {fileID: 7670857266687338686, guid: cc2f65d1c9f8aa448bc31de9682985cc, type: 3}
+  - {fileID: 2100000, guid: e2c6baeac726a4b4d98f3635b63e57ed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -482,7 +482,7 @@ CharacterController:
   m_StepOffset: 0.5
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!114 &1631096157525358219
 MonoBehaviour:
   m_ObjectHideFlags: 0

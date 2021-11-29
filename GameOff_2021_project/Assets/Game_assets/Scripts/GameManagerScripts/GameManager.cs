@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public float EffectsVolume { get => effectsVolume; }
     public float VoiceVolume { get => voiceVolume; }
 
-    public bool GameIsOn { get; set; }
+    public bool GameIsOn;
     public bool FinalLevel { get; set; }
     public bool FovRoom { get; set; }
 
@@ -52,8 +52,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+
+        GameIsOn = true;
         
         DontDestroyOnLoad(gameObject);
+        
+        
         
     }
 

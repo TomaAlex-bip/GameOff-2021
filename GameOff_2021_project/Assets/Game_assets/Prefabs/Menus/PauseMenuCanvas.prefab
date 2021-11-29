@@ -839,19 +839,23 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Welcome to the Environmental Bug Testing Center!
+  m_Text: 'Welcome to the Environmental BUG Testing Center!
 
 
     This game is about
-    finding bugs, glitches and exploits in order to solve the puzzles.
+    dealing with bugs, glitches, and exploits to solve puzzles.
 
-    Some
-    bugs are mechanical, some are visual, and some are just random :))
+    Some bugs are
+    mechanical, some are visual, and some are just random :))
 
 
-    Controls
-    are simple: "WASD" to move. "Mouse" to look  around. "LeftCtrl" or "C" to crouch,
+    Controls are
+    simple: "WASD" to move. "Mouse" to look around. "LeftCtrl" or "C" to crouch,
     "LeftShift" to sprint, and "Space" to jump.
+
+
+    Listen carefully to the narrator
+    for instructions and hints about completing the puzzles.
 
 
     Have Fun!'
@@ -5299,6 +5303,7 @@ MonoBehaviour:
   exitPanel: {fileID: 5349537730783734493}
   fadePanel: {fileID: 5349537731875059333}
   firstLevel: {fileID: 102900000, guid: 32a8561b655f6e543b0a764107ea2721, type: 3}
+  firstLevelIndex: 0
 --- !u!1 &5349537732373817325
 GameObject:
   m_ObjectHideFlags: 0

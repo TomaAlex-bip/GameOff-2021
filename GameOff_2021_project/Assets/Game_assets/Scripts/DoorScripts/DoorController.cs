@@ -25,8 +25,8 @@ public class DoorController : MonoBehaviour
         
         initialPositionL = leftDoor.localPosition;
         initialPositionR = rightDoor.localPosition;
-        desiredPositionL = leftDoor.localPosition + new Vector3(0.9f, 0f, 0f);
-        desiredPositionR = rightDoor.localPosition + new Vector3(-0.9f, 0f, 0f);
+        desiredPositionL = leftDoor.localPosition + new Vector3(0.99f, 0f, 0f);
+        desiredPositionR = rightDoor.localPosition + new Vector3(-0.99f, 0f, 0f);
         
         GameEvents.Instance.onDoorTriggerEnter += OpenDoor;
         GameEvents.Instance.onDoorTriggerExit += CloseDoor;
@@ -36,6 +36,8 @@ public class DoorController : MonoBehaviour
     {
         if (id == triggerId)
         {
+            print("open door");
+            SoundManager.Instance.PlaySound("e_door_open");
             StopAllCoroutines();
             StartCoroutine(OpenLeftDoorCoroutine());
             StartCoroutine(OpenRightDoorCoroutine());
@@ -46,6 +48,8 @@ public class DoorController : MonoBehaviour
     {
         if (id == triggerId)
         {
+            print("close door");
+            SoundManager.Instance.PlaySound("e_door_close");
             StopAllCoroutines();
             StartCoroutine(CloseLeftDoorCoroutine());
             StartCoroutine(CloseRightDoorCoroutine());

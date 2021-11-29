@@ -17,6 +17,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private Image fadePanel;
 
     [SerializeField] private Object firstLevel;
+    [SerializeField] private int firstLevelIndex;
 
     private Image currentPanel;
 
@@ -108,7 +109,8 @@ public class MenuController : MonoBehaviour
             yield return null;
         }
         
-        SceneManager.LoadScene(firstLevel.name);
+        // SceneManager.LoadScene(firstLevel.name);
+        SceneManager.LoadScene(firstLevelIndex);
         SoundManager.Instance.StopSound("m_MainMenu_theme");
         inTransition = false;
     }

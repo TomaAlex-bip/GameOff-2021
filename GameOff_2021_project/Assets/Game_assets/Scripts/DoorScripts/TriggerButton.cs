@@ -6,29 +6,52 @@ using UnityEngine;
 public class TriggerButton : MonoBehaviour
 {
     [SerializeField] private int id;
+
+
+    private bool playerEntered;
+    private bool cubeEntered;
+    
     
     private void OnTriggerEnter(Collider other)
     {
-        //GameEvents.Instance.DoorTriggerEnter(id);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        GameEvents.Instance.DoorTriggerEnter(id);
-        // print("stay in trigger obj: " + other.name);
-    }
-
-    private void Update()
-    {
-        //GameEvents.Instance.DoorTriggerExit(id);
+        if(other.CompareTag("Player"))
+        {
+            playerEntered = true;
+        }
+        if(other.CompareTag("Interactable"))
+        {
+            cubeEntered = true;
+        }
+        
+        if ((playerEntered && !cubeEntered) || (!playerEntered && cubeEntered))
+        {
+            GameEvents.Instance.DoorTriggerEnter(id);
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (GameManager.Instance.GameIsOn)
+        
+        if(other.CompareTag("Player"))
         {
-            // print("exit from trigger obj: " + other.name);
-            GameEvents.Instance.DoorTriggerExit(id);
+            playerEntered = false;
         }
+        if(other.CompareTag("Interactable"))
+        {
+            cubeEntered = false;
+        }
+
+        if (!playerEntered && !cubeEntered)
+        {
+            if (GameManager.Instance.GameIsOn)
+            {
+                GameEvents.Instance.DoorTriggerExit(id);
+            }
+            
+        }
+
+
+
     }
 }
