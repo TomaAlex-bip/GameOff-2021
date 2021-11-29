@@ -1,2 +1,3 @@
 # GameOff-2021
-submission for Game Off 2021 jam
+
+BUGtesting Center Application - submission for Game Off 2021 jam
